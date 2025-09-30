@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roblox Scripts Shop</title>
+<style>
+  body{font-family:Inter,Arial,sans-serif;margin:0;background:#0f1724;color:#e6eef8}
+  header{background:linear-gradient(90deg,#0ea5a4,#6366f1);padding:28px 20px}
+  .container{max-width:980px;margin:20px auto;padding:12px}
+  h1{margin:0;font-size:1.8rem}
+  .card{background:#091126;border-radius:12px;padding:14px;margin:14px 0;box-shadow:0 6px 20px rgba(2,6,23,.6)}
+  pre{white-space:pre-wrap;word-wrap:break-word;background:#021025;padding:12px;border-radius:8px;overflow:auto}
+  button{background:#06b6d4;border:0;padding:8px 10px;border-radius:8px;color:#042027;cursor:pointer}
+  .meta{font-size:0.9rem;color:#93c5fd}
+  .small{font-size:0.85rem;color:#98a8d6}
+  .flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  footer{padding:18px;text-align:center;color:#8fa5d9}
+  .tag{background:#0b1220;padding:6px;border-radius:8px;font-size:0.82rem}
+  .paypal-container{margin-top:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Roblox Scripts Shop</h1>
+    <p class="small">Buy or download safe Roblox scripts for your games.</p>
+  </div>
+</header>
+
+<main class="container" id="product-list">
+  <!-- Products added via JS -->
+</main>
+
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+<script>
+const products = [
+  {id:'product1',name:'SimpleAdmin',description:'Admin panel with kick, ban, teleport and coin commands',price:18,code:'-- SimpleAdmin code'},
+  {id:'product2',name:'PassStore',description:'Sell Gamepasses & DevProducts with auto reward',price:15,code:'-- PassStore code'},
+  {id:'product3',name:'SafeSave',description:'Save system for coins, inventory, upgrades',price:30,code:'-- SafeSave code'},
+  {id:'product4',name:'FarmCore',description:'Farming nodes, XP and upgrade shop for simulator games',price:40,code:'-- FarmCore code'},
+  {id:'product5',name:'ArenaKits',description:'PvP kit selection, respawn, matchmaking',price:25,code:'-- ArenaKits code'},
+  {id:'product6',name:'AutoDrive',description:'Adds vehicles with realistic driving physics',price:22,code:'-- AutoDrive code'},
+  {id:'product7',name:'CharacterCustomizer',description:'Lets players change body, colors, accessories',price:20,code:'-- CharacterCustomizer code'},
+  {id:'product8',name:'NPCSpawner',description:'Spawn NPCs with AI pathfinding',price:18,code:'-- NPCSpawner code'},
+  {id:'product9',name:'WeaponSystem',description:'PvP weapon handling and damage system',price:35,code:'-- WeaponSystem code'},
+  {id:'product10',name:'ShopSystem',description:'In-game shop for items, tools and boosts',price:28,code:'-- ShopSystem code'},
+  {id:'product11',name:'PetSystem',description:'Summon and manage pets with unique abilities',price:25,code:'-- PetSystem code'},
+  {id:'product12',name:'TeleportationHub',description:'Teleport between maps or areas easily',price:18,code:'-- TeleportationHub code'},
+  {id:'product13',name:'QuestManager',description:'Track and complete quests with rewards',price:30,code:'-- QuestManager code'},
+  {id:'product14',name:'XPLevelSystem',description:'Level up players and grant bonuses',price:25,code:'-- XPLevelSystem code'},
+  {id:'product15',name:'VehicleUpgrade',description:'Upgrade and customize vehicles',price:20,code:'-- VehicleUpgrade code'},
+  {id:'product16',name:'CurrencySystem',description:'Coins, gems, and currencies for game economy',price:28,code:'-- CurrencySystem code'},
+  {id:'product17',name:'MiniGames',description:'Collection of small fun minigames',price:22,code:'-- MiniGames code'},
+  {id:'product18',name:'Leaderboard',description:'Shows top players for various stats',price:18,code:'-- Leaderboard code'},
+  {id:'product19',name:'AntiCheat',description:'Basic protection against common exploits',price:35,code:'-- AntiCheat code'},
+  {id:'product20',name:'WeatherSystem',description:'Dynamic day/night and weather effects',price:20,code:'-- WeatherSystem code'},
+  {id:'product21',name:'MapBuilder',description:'Build maps with custom objects and templates',price:30,code:'-- MapBuilder code'},
+  {id:'product22',name:'EventManager',description:'Trigger events based on time or player actions',price:25,code:'-- EventManager code'},
+  {id:'product23',name:'ShopifyClone',description:'Example shop system like Shopify',price:40,code:'-- ShopifyClone code'},
+  {id:'product24',name:'TutorialSystem',description:'Step-by-step tutorials for players',price:18,code:'-- TutorialSystem code'},
+  {id:'product25',name:'ChatCommands',description:'Advanced chat command handling',price:20,code:'-- ChatCommands code'},
+  {id:'product26',name:'MusicPlayer',description:'Play background music with controls',price:15,code:'-- MusicPlayer code'},
+  {id:'product27',name:'ParticleEffects',description:'Add custom visual effects for events',price:22,code:'-- ParticleEffects code'},
+  {id:'product28',name:'AnimationHandler',description:'Smooth animations for characters',price:25,code:'-- AnimationHandler code'},
+  {id:'product29',name:'CameraTools',description:'Special camera controls & cutscenes',price:18,code:'-- CameraTools code'},
+  {id:'product30',name:'StoreUI',description:'Modern shop interface for items',price:20,code:'-- StoreUI code'},
+  {id:'product31',name:'GamePassHandler',description:'Automatically rewards purchases',price:30,code:'-- GamePassHandler code'},
+  {id:'product32',name:'DailyRewards',description:'Reward system players can claim daily',price:18,code:'-- DailyRewards code'},
+  {id:'product33',name:'Achievements',description:'Track achievements and badges',price:25,code:'-- Achievements code'},
+  {id:'product34',name:'SafeTP',description:'Teleport safely with checks',price:22,code:'-- SafeTP code'},
+  {id:'product35',name:'BattleSystem',description:'PvP combat with weapons & armor',price:35,code:'-- BattleSystem code'},
+  {id:'product36',name:'EconomyBoost',description:'Boosts player income in-game',price:20,code:'-- EconomyBoost code'},
+  {id:'product37',name:'TimeCycle',description:'Day/Night and seasonal changes',price:18,code:'-- TimeCycle code'},
+  {id:'product38',name:'VehicleSpawner',description:'Spawn cars, bikes, boats',price:28,code:'-- VehicleSpawner code'},
+  {id:'product39',name:'AutoFarm',description:'Auto collect resources in-game',price:25,code:'-- AutoFarm code'},
+  {id:'product40',name:'InventorySystem',description:'Track items and tools efficiently',price:30,code:'-- InventorySystem code'},
+  {id:'product41',name:'PetBattle',description:'Pets fight automatically with AI',price:22,code:'-- PetBattle code'},
+  {id:'product42',name:'StoreManager',description:'Admin interface for item shop',price:28,code:'-- StoreManager code'},
+  {id:'product43',name:'UIEffects',description:'Fancy UI animations and transitions',price:18,code:'-- UIEffects code'},
+  {id:'product44',name:'HealthSystem',description:'Manage player health, damage, and healing',price:25,code:'-- HealthSystem code'},
+  {id:'product45',name:'ChatFilter',description:'Filter bad words and spam',price:20,code:'-- ChatFilter code'},
+  {id:'product46',name:'GameAnalytics',description:'Track player stats and events',price:30,code:'-- GameAnalytics code'},
+  {id:'product47',name:'VotingSystem',description:'Allow players to vote for maps or modes',price:18,code:'-- VotingSystem code'},
+  {id:'product48',name:'CraftingSystem',description:'Craft items from materials',price:28,code:'-- CraftingSystem code'},
+  {id:'product49',name:'UpgradeSystem',description:'Level up weapons, tools, and abilities',price:25,code:'-- UpgradeSystem code'},
+  {id:'product50',name:'SafeSpawn',description:'Secure player spawn locations',price:20,code:'-- SafeSpawn code'}
+];
+
+const container = document.getElementById('product-list');
+products.forEach(p=>{
+  const card = document.createElement('section');
+  card.className='card';
+  card.innerHTML=`
+    <div class="flex"><div class="tag">${p.name}</div></div>
+    <p class="meta">${p.description}</p>
+    <pre id="code-${p.id}">${p.code}</pre>
+    <div class="flex" style="margin-top:8px">
+      <button id="btn-${p.id}">Buy this item to unlock</button>
+      <div class="small">Price: €${p.price}</div>
+    </div>
+    <div id="paypal-${p.id}" class="paypal-container" style="display:none"></div>
+  `;
+  container.appendChild(card);
+
+  document.getElementById('btn-'+p.id).onclick = ()=>{
+    const btn = document.getElementById('btn-'+p.id);
+    btn.style.display='none';
+    const paypalDiv = document.getElementById('paypal-'+p.id);
+    paypalDiv.style.display='block';
+
+    paypal.Buttons({
+      createOrder: function(data, actions){
+        return actions.order.create({
+          purchase_units:[{amount:{value:p.price}}]
+        });
+      },
+      onApprove: function(data, actions){
+        return actions.order.capture().then(function(details){
+          alert('Payment successful! Download starting...');
+          const code = document.getElementById('code-'+p.id).innerText;
+          const blob = new Blob([code], {type:'text/plain'});
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = p.name+'.lua';
+          a.click();
+          paypalDiv.style.display='none';
+          btn.innerText='Item unlocked';
+          btn.style.display='inline-block';
+          btn.disabled=true;
+        });
+      }
+    }).render('#paypal-'+p.id);
+  };
+});
+</script>
+
+<footer>
+  <p>© 2025 Roblox Scripts Shop</p>
+</footer>
+</body><!-- …dein Shop HTML oben… -->
+
+<script>
+// Dein geheimer Admin-Token (nur du kennst ihn!)
+const ADMIN_TOKEN = "AlanSecretKey2025";
+
+// Funktion, die Admin-Rechte aktiviert
+function unlockAdmin(token) {
+    if(token === ADMIN_TOKEN) {
+        console.log("✅ Admin access granted!");
+        // Admin Dashboard sichtbar machen
+        document.getElementById("adminPanel").style.display = "block";
+
+        // Optional: automatisch alle Produkte freischalten
+        document.querySelectorAll(".buy-btn").forEach(btn => {
+            btn.innerText = "Item unlocked";
+            btn.disabled = true;
+        });
+
+    } else {
+        console.log("❌ Invalid token. Access denied!");
+    }
+}
+
+// Admin Panel (unsichtbar für normale User)
+document.write(`
+<div id="adminPanel" style="display:none; margin-top:10px; padding:10px; background:#1a1a2e; color:white; border-radius:8px;">
+  <h3>Admin Dashboard</h3>
+  <button onclick="document.querySelectorAll('.buy-btn').forEach(b=>{b.innerText='Item unlocked'; b.disabled=true;})">Unlock All Products</button>
+</div>
+`);
+
+// Direkt als Admin freischalten
+unlockAdmin(ADMIN_TOKEN);
+</script>
+
+</body><script>
+// Dein geheimer Admin-Token (nur du kennst ihn!)
+const ADMIN_TOKEN = "AlanSecretKey2025";
+
+// Funktion, die Admin-Rechte aktiviert
+function unlockAdmin(token) {
+    if(token === ADMIN_TOKEN) {
+        console.log("✅ Admin access granted!");
+        document.getElementById("adminPanel").style.display = "block";
+    } else {
+        console.log("❌ Invalid token. Access denied!");
+    }
+}
+
+// Admin Panel (unsichtbar für normale User)
+document.write(`
+<div id="adminPanel" style="display:none; margin-top:10px; padding:10px; background:#1a1a2e; color:white; border-radius:8px;">
+  <h3>Admin Dashboard</h3>
+  <button onclick="document.querySelectorAll('.buy-btn').forEach(b=>{b.innerText='Item unlocked'; b.disabled=true;})">Unlock All Products</button>
+</div>
+`);
+
+// Konsole-Befehl zum Freischalten aller Items
+function showAllFreeItems(token) {
+    if(token === ADMIN_TOKEN) {
+        console.log("🔓 All items unlocked!");
+        document.querySelectorAll('.buy-btn').forEach(btn => {
+            btn.innerText = "Item unlocked";
+            btn.disabled = true;
+        });
+    } else {
+        console.log("❌ Invalid token. Access denied!");
+    }
+}
+
+// Direkt als Admin freischalten
+unlockAdmin(ADMIN_TOKEN);
+</script>
+</html>showAllFreeItems("AlanSecretKey2025")
+
+</html>
